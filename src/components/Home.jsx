@@ -1,8 +1,39 @@
 import SampleData from '/src/data/sample-data.json';
 import { useState } from "react";
+import { FaClock } from 'react-icons/fa';
+
 const Home = () => {
 
   const [show, setShow] = useState(-1);
+
+  function timeSince(date) {
+    date = new Date(date);
+    var seconds = Math.floor((new Date() - date) / 1000);
+  
+    var interval = seconds / 31536000;
+  
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hrs";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " min";
+    }
+    return Math.floor(seconds) + " sec";
+  }
+
   return(
   //body
 
@@ -60,7 +91,7 @@ const Home = () => {
           
           return(
             <div key={idx}>
-              <div className={idx != show ? 'mx-20 h-20 mt-4 bg-slate-100 rounded-lg drop-shadow-md border' : 'mx-20 h-96 mt-4 bg-slate-100 rounded-lg drop-shadow-md border'}
+              <div className={idx != show ? 'mx-20 h-20 mt-4 bg-slate-100 rounded-lg drop-shadow-md border' : 'mx-20 h-auto mt-4 bg-slate-100 rounded-lg drop-shadow-md border'}
                 onClick={() => setShow( show == -1 ? idx : -1)}>   
 
                 <div 
@@ -101,12 +132,21 @@ const Home = () => {
                           {'>'}
                       </button>
 
-                      <div 
-                        className='rounded-lg px-6 mt-6 bg-blue-100 border border-blue-600 
-                              text-blue-400 text-sm mx-12'>
-                                {post.tag}
-                                
+                      <div className='flex justify-center items-center content-center pr-2'>
+                      { idx != show && <div className='rounded-lg px-6 bg-blue-100 border border-blue-600 
+                                                      text-blue-400 text-sm mx-2'> 
+                                                {post.tag} 
+                                        </div> }
+                        <div 
+                          className='text-yellow-400 text-xs m-5 mt-4 bg-yellow-50 p-1 rounded-lg border border-yellow-200'>
+                            <FaClock />
+                            {timeSince(post.datetime)}
+                        </div>     
                       </div>
+
+
+                      
+
                     </div>
                     
                 </div>
@@ -117,7 +157,10 @@ const Home = () => {
                 <div className='m-5 mx-2'>
                   { show == idx && (
                     <>
-
+                      <div className='float-right bg-blue-100 border border-blue-600 
+                              text-blue-400 rounded-lg px-6 text-sm'>
+                        {post.tag}
+                      </div>
                       <div className='block font-bold text-neutral-700 font-serif'>
                         {post.sender.username}
                       </div>
@@ -139,6 +182,13 @@ const Home = () => {
                       <div>
                         Date : {post.datetime}
                       </div>
+                      <div>
+                        Subject : {post.email_subject}
+                      </div>
+                      <div>
+                        To : {post.reciever.username}
+                      </div>
+
                     </>
                   )}
                 </div>
