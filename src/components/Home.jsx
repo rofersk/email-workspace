@@ -137,7 +137,7 @@ const Home = () => {
                       {' <'}{post.sender.email}{'>'}
                       </a>
                       <div>
-                        Date
+                        Date : {post.datetime}
                       </div>
                     </>
                   )}
