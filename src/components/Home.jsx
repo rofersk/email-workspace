@@ -1,6 +1,7 @@
 import SampleData from '/src/data/sample-data.json';
 import { useState } from "react";
-import { FaClock } from 'react-icons/fa';
+import { FaClock, FaSave, FaFilter, FaTrashAlt} from 'react-icons/fa';
+
 
 const Home = () => {
 
@@ -39,7 +40,7 @@ const Home = () => {
 
   <div className='h-auto'>
     <div className=' bg-slate-200 h-14 mx-12 drop-shadow-md rounded-sm'>
-      <div className='float-left'>
+      <div className='flex justify-center float-left'>
 
       <input 
         id="default-checkbox" 
@@ -50,21 +51,24 @@ const Home = () => {
       </input>
 
       <button 
-        className="px-4 ml-2 mt-4 text-green-600 uppercase text-xs 
+        className="flex justify-center items-center px-2 ml-2 mt-4 text-green-600 uppercase text-xs 
                   rounded-md border border-green-300 bg-green-100">
                   Save
+                  <FaSave className='m-1'/>
       </button>
 
       <button 
-        className="px-6 ml-2 mt-4 uppercase text-xs text-slate-600 rounded-md border 
+        className="flex justify-center items-center px-2 ml-2 mt-4 uppercase text-xs text-slate-600 rounded-md border 
                 border-slate-300 bg-slate-50">
                   Manage Filters
+                  <FaFilter className='m-1' />
       </button>
 
       <button 
-        className="px-5 ml-6 mt-4 uppercase text-xs text-red-600 rounded-md 
+        className="flex justify-center items-center px-2 ml-6 mt-4 uppercase text-xs text-red-600 rounded-md 
                   border border-red-300 bg-red-100">
                   Delete
+                  <FaTrashAlt className='m-1' />
       </button>
 
       </div>
@@ -138,19 +142,13 @@ const Home = () => {
                                                 {post.tag} 
                                         </div> }
                         <div 
-                          className='text-yellow-400 text-xs m-5 mt-4 bg-yellow-50 p-1 rounded-lg border border-yellow-200'>
-                            <FaClock />
+                          className='flex justify-center items-center  text-yellow-400 text-xs m-5 mt-4 bg-yellow-50 p-1 rounded-lg border border-yellow-200'>
+                            <FaClock className='m-1'/>
                             {timeSince(post.datetime)}
                         </div>     
                       </div>
-
-
-                      
-
-                    </div>
-                    
-                </div>
-                
+                    </div>                  
+                </div>            
                 <div className='mt-24 mx-10'>
                   
                 <hr/>
